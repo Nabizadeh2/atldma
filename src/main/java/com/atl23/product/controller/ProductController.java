@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,14 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     public String deleteProductId(@PathVariable Long id) throws Exception{
         return productService.deleteProductById(id);
+    }
 
-
+    @GetMapping("/get")
+    public List<ProductResponseDto> getByPrice(@RequestParam BigDecimal price){
+        return productService.getByPrice(price);
+    }
+    @GetMapping("/get")
+    public List<ProductResponseDto> getByName(@RequestParam String name){
+        return productService.getByName(name);
     }
 }

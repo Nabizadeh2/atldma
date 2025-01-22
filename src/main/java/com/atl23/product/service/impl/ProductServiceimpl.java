@@ -10,6 +10,7 @@ import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +78,18 @@ public class ProductServiceimpl implements ProductService {
             return "row is deleted";
         }
         throw new Exception("Id not found!!!");
+    }
+
+    public List<ProductResponseDto> getByPrice(BigDecimal price){
+        List<ProductEntity> entity = productRepository.findByPrice(price);
+        return productMapper.getProduct(entity);
+
+    }
+
+    @Override
+    public List<ProductResponseDto> getByName(String name) {
+        List<ProductEntity> entities = productRepository.findByName(name);
+        return productMapper.getProduct(entities);
     }
 
 }
